@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechOS Core - Dashboard</title>
+    <link rel="stylesheet" href="../../public/css/style.css">
+    <!-- Biblioteca Toastify para Notificações Visuals -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <h1>TechOS Core - Gestão de Ordens de Serviço</h1>
+    </header>
+
+    <main class="container">
+        <!-- Formulario UI (Model/View/Controller Integration) -->
+        <section class="card">
+            <h2>Criar Nova Ordem de Serviço</h2>
+            <form id="form-os">
+                <div class="form-group">
+                    <label for="tipo-usuario">Tipo de Utilizador:</label>
+                    <select id="tipo-usuario" required>
+                        <option value="Cliente">Cliente</option>
+                        <option value="Tecnico">Técnico</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="nome-usuario">Nome:</label>
+                    <input type="text" id="nome-usuario" placeholder="Ex: Maria Silva" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email-usuario">E-mail:</label>
+                    <input type="email" id="email-usuario" placeholder="maria@techos.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao-os">Descrição do Chamado:</label>
+                    <textarea id="descricao-os" rows="3" placeholder="Descreva o problema..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">Registar Chamado</button>
+            </form>
+        </section>
+
+        <!-- Tabela de Exibicao Dinamica -->
+        <section class="card">
+            <h2>Ordens de Serviço Abertas</h2>
+            <table id="tabela-os">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente / Solicitante</th>
+                        <th>Descrição</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Os itens serao inseridos dinamicamente pelo Controller -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Scripts Javascript (Import do Controller e Toastify) -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module">
+        import OrdemServicoController from '../controllers/OrdemServicoController.js';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const controller = new OrdemServicoController();
+            controller.init();
+        });
+    </script>
+</body>
+</html>
